@@ -33,10 +33,10 @@ file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR}
   "ui_files/**.ui"
 )
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Sql REQUIRED)
 
 add_executable(CitiesDb ${SOURCES})
-target_link_libraries(CitiesDb Qt5::Widgets)
+target_link_libraries(CitiesDb Qt5::Widgets Qt5::Sql)
 
 include(FetchContent)
 

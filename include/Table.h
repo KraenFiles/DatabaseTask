@@ -1,14 +1,14 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include "TableField.h"
+#include "ITableField.h"
 
 #include <QMap>
 #include <QList>
 
 #include "TableMacro.h"
 
-namespace DataBase { namespace Data {
+namespace Database { namespace Data {
 
 class TableLine
 {
@@ -27,8 +27,6 @@ private:
     QMap<QString, ITableField *> m_fields;
 };
 
-using Table = QList<TableLine>;
-
-}} // namespace DataBase::Data
+}} // namespace Database::Data
 
 #endif

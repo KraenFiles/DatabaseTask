@@ -2,17 +2,18 @@
 #define TABLEFIELD_H
 
 #include "ITableField.h"
+#include "Condition.h"
 #include "Table.h"
 
-namespace DataBase { namespace Data {
+namespace Database { namespace Data {
 
 template<typename T>
 class TableField : public ITableField
 {
 public:
-    TableField(const QString & name, TableLine * table);
+    TableField(const QString & name, TableLine *table);
     TableField(const TableField & other) = delete;
-    TableField(const TableField & other, TableLine * table);
+    TableField(const TableField & other, TableLine *table);
     ~TableField() override = default;
 
     inline T get() const { return m_value.value<T>(); }
@@ -20,13 +21,20 @@ public:
 
     inline QVariant value() const override { return m_value; };
     inline void setValue(const QVariant & value) override { m_value = value; }
+
+    inline Query::Condition operator==( const T & value ) const { return { "=", name(), value }; }
+    inline Query::Condition operator!=( const T & value ) const { return { "!=", name(), value }; }
+    inline Query::Condition operator>( const T & value ) const { return { ">", name(), value }; }
+    inline Query::Condition operator>=( const T & value ) const { return { ">=", name(), value }; }
+    inline Query::Condition operator<( const T & value ) const { return { "<", name(), value }; }
+    inline Query::Condition operator<=( const T & value ) const { return { "<=", name(), value }; }
     
 private:
     QVariant m_value;
 };
 
 template <typename T>
-inline TableField<T>::TableField(const QString &name, TableLine * table)
+TableField<T>::TableField(const QString &name, TableLine *table)
     : ITableField(name)
     , m_value()
 {
@@ -34,13 +42,13 @@ inline TableField<T>::TableField(const QString &name, TableLine * table)
 }
 
 template<typename T>
-inline TableField<T>::TableField(const TableField & other, TableLine * table)
+TableField<T>::TableField(const TableField & other, TableLine *table)
     : ITableField(other)
     , m_value()
 {
     table->registrField(this);
 }
 
-}} // namespace DataBase::Data
+}} // namespace Database::Data
 
 #endif

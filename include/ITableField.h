@@ -4,7 +4,7 @@
 #include <QString>
 #include <QVariant>
 
-namespace DataBase { namespace Data {
+namespace Database { namespace Data {
 
 class ITableField
 {
@@ -21,6 +21,6 @@ private:
     QString m_name;
 };
 
-}} // namespace DataBase::Data
+}} // namespace Database::Data
 
 #endif

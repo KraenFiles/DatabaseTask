@@ -1,10 +1,9 @@
 #include "ITableField.h"
 
-namespace DataBase { namespace Data {
+namespace Database { namespace Data {
 
 ITableField::ITableField(const QString &name)
     :m_name(name)
-{
-}
+{}
 
-}} // namespace DataBase::Data
+}} // namespace Database::Data
